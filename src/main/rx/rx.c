@@ -246,7 +246,7 @@ void rxInit(void)
     rxRuntimeConfig.requireFiltering = false;
     rcSampleIndex = 0;
 
-      timeMs_t nowMs = millis();
+    timeMs_t nowMs = millis();
 
     for (int i = 0; i < MAX_SUPPORTED_RC_CHANNEL_COUNT; i++) {
         rcChannels[i].raw = PWM_RANGE_MIDDLE;
@@ -540,6 +540,7 @@ bool calculateRxChannelsAndUpdateFailsafe(timeUs_t currentTimeUs)
                 rcChannels[channel].data = rcStaging[channel];
             }
         }
+
     }
 
     // Update failsafe
