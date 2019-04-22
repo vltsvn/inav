@@ -374,17 +374,17 @@ void resetMulticopterPositionController(void)
 
 bool adjustMulticopterPositionFromRCInput(float rcPitchAdjustment, float rcRollAdjustment)
 {
-    // TODO: Needs to accept floats in [-1,1]
+    bool isAdjusting = rcPitchAdjustment != 0 || rcRollAdjustment != 0;
 
     // Process braking mode
-    processMulticopterBrakingMode(rcPitchAdjustment || rcRollAdjustment);
+    processMulticopterBrakingMode(isAdjusting);
 
     // Actually change position
-    if (rcPitchAdjustment || rcRollAdjustment) {
+    if (isAdjusting) {
         // If mode is GPS_CRUISE, move target position, otherwise POS controller will passthru the RC input to ANGLE PID
         if (navConfig()->general.flags.user_control_mode == NAV_GPS_CRUISE) {
-            const float rcVelX = rcPitchAdjustment * navConfig()->general.max_manual_speed / (500 - rcControlsConfig()->pos_hold_deadband);
-            const float rcVelY = rcRollAdjustment * navConfig()->general.max_manual_speed / (500 - rcControlsConfig()->pos_hold_deadband);
+            const float rcVelX = rcPitchAdjustment * navConfig()->general.max_manual_speed;
+            const float rcVelY = rcRollAdjustment * navConfig()->general.max_manual_speed;
 
             // Rotate these velocities from body frame to to earth frame
             const float neuVelX = rcVelX * posControl.actualState.cosYaw - rcVelY * posControl.actualState.sinYaw;
