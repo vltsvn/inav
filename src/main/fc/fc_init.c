@@ -327,7 +327,7 @@ void init(void)
 
     if (motorConfig()->motorPwmProtocol == PWM_TYPE_BRUSHED) {
         pwm_params.useFastPwm = false;
-        featureClear(FEATURE_3D);
+        featureClear(FEATURE_BIDIR_MOTORS);
     }
 
     pwm_params.enablePWMOutput = feature(FEATURE_PWM_OUTPUT_ENABLE);

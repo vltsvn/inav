@@ -295,7 +295,7 @@ void initActiveBoxIds(void)
 #endif
 #endif
 
-    if (feature(FEATURE_3D)) {
+    if (feature(FEATURE_BIDIR_MOTORS)) {
         activeBoxIds[activeBoxIdCount++] = BOXBIDIRTHR;
     }
 }
