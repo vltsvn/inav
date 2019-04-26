@@ -275,7 +275,7 @@ void failsafeApplyControlOutput(rcCommand_t *cmd)
                         cmd->yaw = RC_COMMAND_CENTER;
                         break;
                     case THROTTLE:
-                        cmd->throttle = rcCommandMapUnidirectionalPWMValue(failsafeConfig()->failsafe_throttle);
+                        cmd->throttle = rcCommandMapUnidirectionalPWMThrottle(failsafeConfig()->failsafe_throttle);
                         break;
                 }
                 break;
