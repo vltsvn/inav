@@ -32,7 +32,7 @@ Traditional helicopter supported by INAV started [firmware](https://github.com/i
 
 ![Board and firmware version](assets/images/heli_setup/board_firmware.png)
 
-6. Push "Load Fiemware [Online]" button. After download is complete check "Full chip erase" and push "Flash Firmware" button.
+6. Push "Load Firmware [Online]" button. After download is complete check "Full chip erase" and push "Flash Firmware" button.
 
 ![Checkboxes](assets/images/heli_setup/erase_chip.png)
 
@@ -147,3 +147,28 @@ Push "Save and Reboot" button.
 ### Servo checking
 **WARNING! Disconnect motor from ESC!**
 
+Now you may correct CCPM Pitch/Roll weight. Slowly tilt cyclic pitch stick diagonaly and make sure that swashplate doesn't stuck. Check it for all 4 diagonals. If swashplate stucks then you must reduce CCPM Pitch/Roll weight.
+
+Example of stucked swashplate:
+
+![Stucked swashplate](assets/images/heli_setup/stucked_swashplate.png)
+
+For testing servos you need to tilt cyclic pitch stick and check position of swashplate. Swashplate should be tilted corresponding the stick.
+
+Left view:
+
+![Stick up](assets/images/heli_setup/stick_up.png)
+![Pitch up](assets/images/heli_setup/pitch_up.png)
+
+![Stick down](assets/images/heli_setup/stick_down.png)
+![Pitch down](assets/images/heli_setup/pitch_down.png)
+
+Front view:
+
+![Stick left](assets/images/heli_setup/stick_left.png)
+![Roll left](assets/images/heli_setup/roll_left.png)
+
+![Stick right](assets/images/heli_setup/stick_right.png)
+![Roll right](assets/images/heli_setup/roll_right.png)
+
+If your helicopter has got tail rotor blades pitch control servo then tilt yaw stick and check tail rotor blades pitch changes respectively.
