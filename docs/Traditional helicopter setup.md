@@ -133,6 +133,18 @@ Go to "Configuration" tab. Input min and max values inside "Minimum Throttle" an
 
 ![Min max throttle](assets/images/heli_setup/min_max_throttle.png)
 
+## Primary PID setup
+
+Go to "PID" tab. Input 150 in "Proportional" field for roll and pitch.
+
+![PID](assets/images/heli_setup/pid.png)
+
+Set "ROLL rate" and "PITCH rate" 200 degrees per second.
+
+![Rates](assets/images/heli_setup/angle_rates.png)
+
+Push "Save" button.
+
 ## Checking correctness of setup
 To this moment your sensors, servos and motors should be configured and ready for tests. Now you may connect motors and servos to helicopter.
 
@@ -147,11 +159,15 @@ Push "Save and Reboot" button.
 ### Servo checking
 **WARNING! Disconnect motor from ESC!**
 
-Now you may correct CCPM Pitch/Roll weight. Slowly tilt cyclic pitch stick diagonaly and make sure that swashplate doesn't stuck. Check it for all 4 diagonals. If swashplate stucks then you must reduce CCPM Pitch/Roll weight.
+Now you may correct CCPM Pitch/Roll weight. Slowly tilt cyclic pitch stick diagonaly and make sure that swashplate doesn't stuck. Check it for all 4 diagonals. If the swashplate stucks then you must reduce CCPM Pitch/Roll weight.
 
 Example of stucked swashplate:
 
 ![Stucked swashplate](assets/images/heli_setup/stucked_swashplate.png)
+
+If the swashplate doesn't stuck increase CCPM Pitch/Roll weight and test it again. Repeat it until the swashplate begins to stuck then reduce CCPM Pitch/Roll weight for 1 point.
+
+Now you need to check 
 
 For testing servos you need to tilt cyclic pitch stick and check position of swashplate. Swashplate should be tilted corresponding the stick.
 
