@@ -133,7 +133,7 @@ Go to "Configuration" tab. Input min and max values inside "Minimum Throttle" an
 
 ![Min max throttle](assets/images/heli_setup/min_max_throttle.png)
 
-## Primary PID setup
+## Preliminary PID setup
 
 Go to "PID" tab. Input 150 in "Proportional" field for roll and pitch.
 
@@ -167,7 +167,7 @@ Example of stucked swashplate:
 
 If the swashplate doesn't stuck increase CCPM Pitch/Roll weight and test it again. Repeat it until the swashplate begins to stuck then reduce CCPM Pitch/Roll weight for 1 point.
 
-Now you need to check 
+Now you need to check that your servos react to the helicopter's inclines. Quickly incline your helicopter and check that the swashplate inclines in the oposite direction. Check it for pitch and roll.
 
 For testing servos you need to tilt cyclic pitch stick and check position of swashplate. Swashplate should be tilted corresponding the stick.
 
@@ -188,3 +188,9 @@ Front view:
 ![Roll right](assets/images/heli_setup/roll_right.png)
 
 If your helicopter has got tail rotor blades pitch control servo then tilt yaw stick and check tail rotor blades pitch changes respectively.
+
+## PID setup
+
+Now you need to significantly lower P coefficients for pitch and roll. And then increase these coefficients slightly until it will be comfortable to fly.
+
+After adjusting P coefficents you need to increase I coefficients for pitch and roll until your helicopter becomes to fly even better.
