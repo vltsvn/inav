@@ -1,0 +1,31 @@
+From 366a3f04e979abd5126eb7cdd7f0d9bb1aaccb4c Mon Sep 17 00:00:00 2001
+From: Vitaly Vyaltsev <vltsvn_temp@tut.by>
+Date: Wed, 15 Jul 2020 10:58:26 +0300
+Subject: [PATCH] mavlink speed
+
+---
+ src/main/telemetry/mavlink.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/main/telemetry/mavlink.c b/src/main/telemetry/mavlink.c
+index 10901f62d..4c47f9604 100755
+--- a/src/main/telemetry/mavlink.c
++++ b/src/main/telemetry/mavlink.c
+@@ -342,11 +342,11 @@ void mavlinkSendPosition(timeUs_t currentTimeUs)
+         gpsSol.llh.alt * 10,
+ #endif
+         // Ground X Speed (Latitude), expressed as m/s * 100
+-        0,
++        gpsSol.velNED[0],
+         // Ground Y Speed (Longitude), expressed as m/s * 100
+-        0,
++        gpsSol.velNED[1],
+         // Ground Z Speed (Altitude), expressed as m/s * 100
+-        0,
++        gpsSol.velNED[2],
+         // heading Current heading in degrees, in compass units (0..360, 0=north)
+         DECIDEGREES_TO_DEGREES(attitude.values.yaw)
+     );
+-- 
+2.25.1
+
