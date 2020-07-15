@@ -1,0 +1,199 @@
+From 98f23ea15b1d3d006791bf34dac36349a1f26c63 Mon Sep 17 00:00:00 2001
+From: Vitaly Vyaltsev <vltsvn_temp@tut.by>
+Date: Wed, 10 Jun 2020 17:52:35 +0300
+Subject: [PATCH] V977
+
+---
+ src/main/target/V977/V977.mk       |   0
+ src/main/target/V977/target.c      |  33 +++++++++
+ src/main/target/V977/target.h      | 103 +++++++++++++++++++++++++++++
+ src/main/target/V977/target.mk     |   9 +++
+ src/main/target/system_stm32f4xx.c |   2 +
+ 5 files changed, 147 insertions(+)
+ create mode 100755 src/main/target/V977/V977.mk
+ create mode 100644 src/main/target/V977/target.c
+ create mode 100644 src/main/target/V977/target.h
+ create mode 100755 src/main/target/V977/target.mk
+
+diff --git a/src/main/target/V977/V977.mk b/src/main/target/V977/V977.mk
+new file mode 100755
+index 000000000..e69de29bb
+diff --git a/src/main/target/V977/target.c b/src/main/target/V977/target.c
+new file mode 100644
+index 000000000..6e2ac41b8
+--- /dev/null
++++ b/src/main/target/V977/target.c
+@@ -0,0 +1,33 @@
++/*
++* This file is part of Cleanflight.
++*
++* Cleanflight is free software: you can redistribute it and/or modify
++* it under the terms of the GNU General Public License as published by
++* the Free Software Foundation, either version 3 of the License, or
++* (at your option) any later version.
++*
++* Cleanflight is distributed in the hope that it will be useful,
++* but WITHOUT ANY WARRANTY; without even the implied warranty of
++* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++* GNU General Public License for more details.
++*
++* You should have received a copy of the GNU General Public License
++* along with Cleanflight.  If not, see <http://www.gnu.org/licenses/>.
++*/
++
++#include <stdbool.h>
++#include <platform.h>
++#include "drivers/io.h"
++#include "drivers/pwm_mapping.h"
++#include "drivers/timer.h"
++
++const timerHardware_t timerHardware[] = {
++    DEF_TIM(TIM3, CH1, PC6,  TIM_USE_MC_MOTOR |                    TIM_USE_FW_MOTOR, 0, 0), // S1
++    DEF_TIM(TIM8, CH2, PC7,  TIM_USE_MC_MOTOR |                    TIM_USE_FW_SERVO, 0, 1), // S2  UP(2,1)
++    DEF_TIM(TIM8, CH3, PC8,  TIM_USE_MC_MOTOR |                    TIM_USE_FW_SERVO, 0, 1), // S3  UP(2,1)
++    DEF_TIM(TIM8, CH4, PC9,  TIM_USE_MC_MOTOR |                    TIM_USE_FW_SERVO, 0, 0), // S4  UP(2,1)
++    DEF_TIM(TIM1, CH1, PA8,  TIM_USE_MC_MOTOR |                    TIM_USE_FW_MOTOR, 0, 0), // S5  
++    DEF_TIM(TIM5, CH2, PA1,  TIM_USE_ANY,                                            0, 0), //softserial1_Tx
++};
++
++const int timerHardwareCount = sizeof(timerHardware) / sizeof(timerHardware[0]);
+diff --git a/src/main/target/V977/target.h b/src/main/target/V977/target.h
+new file mode 100644
+index 000000000..e9c05c8a4
+--- /dev/null
++++ b/src/main/target/V977/target.h
+@@ -0,0 +1,103 @@
++/*
++ * This file is part of Cleanflight.
++ *
++ * Cleanflight is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * Cleanflight is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with Cleanflight.  If not, see <http://www.gnu.org/licenses/>.
++ */
++
++#pragma once
++
++#define TARGET_BOARD_IDENTIFIER "V977"
++
++#define USBD_PRODUCT_STRING  "V977 F405"
++
++#define LED0                    PB9
++#define LED1                    PA14
++
++// *************** Gyro & ACC **********************
++#define USE_SPI
++#define USE_SPI_DEVICE_1
++
++#define SPI1_SCK_PIN            PA5
++#define SPI1_MISO_PIN   	    PA6
++#define SPI1_MOSI_PIN   	    PA7
++
++#define MPU9250_CS_PIN          PC2
++#define MPU9250_SPI_BUS         BUS_SPI1
++
++#define USE_EXTI
++#define GYRO_INT_EXTI            PC3
++#define USE_MPU_DATA_READY_SIGNAL
++
++#define USE_GYRO
++#define USE_GYRO_MPU9250
++#define GYRO_MPU9250_ALIGN      CW0_DEG
++
++#define USE_ACC
++#define USE_ACC_MPU9250
++#define ACC_MPU9250_ALIGN       CW270_DEG
++
++// *************** UART *****************************
++#define USE_VCP
++#define USE_SLOWSERIAL
++
++#define USE_UART1
++#define UART1_RX_PIN            PA10
++#define UART1_TX_PIN            PA9
++
++#define USE_UART2
++#define UART2_RX_PIN            PA3
++#define UART2_TX_PIN            PA2
++
++#define SERIAL_PORT_COUNT       4
++
++#define DEFAULT_RX_TYPE         RX_TYPE_SERIAL
++#define SERIALRX_PROVIDER       SERIALRX_SBUS
++#define SERIALRX_UART           SERIAL_PORT_USART2
++
++#define USE_I2C
++#define USE_I2C_DEVICE_1
++#define I2C1_SCL                PB6
++#define I2C1_SDA                PB7
++
++#define DEFAULT_I2C_BUS         BUS_I2C1
++
++#define USE_BARO
++#define BARO_I2C_BUS                DEFAULT_I2C_BUS
++#define USE_BARO_BMP280
++
++#define USE_MAG
++#define USE_MAG_MPU9250
++
++// *************** ADC *****************************
++#define USE_ADC
++#define ADC_INSTANCE                ADC1
++#define ADC1_DMA_STREAM             DMA2_Stream0
++#define ADC_CHANNEL_1_PIN           PC5
++#define ADC_CHANNEL_2_PIN           PC4
++#define ADC_CHANNEL_3_PIN           PB1
++#define VBAT_ADC_CHANNEL            ADC_CHN_1
++#define CURRENT_METER_ADC_CHANNEL   ADC_CHN_2
++#define RSSI_ADC_CHANNEL            ADC_CHN_3
++
++#define DEFAULT_FEATURES        ( FEATURE_CURRENT_METER | FEATURE_VBAT )
++#define CURRENT_METER_SCALE   179
++
++#define TARGET_IO_PORTA         0xffff
++#define TARGET_IO_PORTB         0xffff
++#define TARGET_IO_PORTC         0xffff
++#define TARGET_IO_PORTD         (BIT(2))
++
++#define MAX_PWM_OUTPUT_PORTS       6
++
++#define USE_TELEMETRY
+diff --git a/src/main/target/V977/target.mk b/src/main/target/V977/target.mk
+new file mode 100755
+index 000000000..16f63efcd
+--- /dev/null
++++ b/src/main/target/V977/target.mk
+@@ -0,0 +1,9 @@
++F405_TARGETS    += $(TARGET)
++HSE_VALUE        = 12000000
++FEATURES        += VCP ONBOARDFLASH
++
++TARGET_SRC = \
++            drivers/accgyro/accgyro_mpu9250.c \
++            drivers/barometer/barometer_bmp280.c \
++            drivers/compass/compass_mpu9250.c \
++            drivers/max7456.c
+diff --git a/src/main/target/system_stm32f4xx.c b/src/main/target/system_stm32f4xx.c
+index 65add7cf7..379fcce2f 100644
+--- a/src/main/target/system_stm32f4xx.c
++++ b/src/main/target/system_stm32f4xx.c
+@@ -376,6 +376,8 @@ uint32_t hse_value = HSE_VALUE;
+         #define PLL_M   16
+     #elif HSE_VALUE == 8000000
+         #define PLL_M   8
++    #elif HSE_VALUE == 12000000
++        #define PLL_M   12
+     #else
+         #error Invalid HSE_VALUE
+     #endif
+-- 
+2.25.1
+
